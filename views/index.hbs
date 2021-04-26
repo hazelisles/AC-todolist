@@ -6,7 +6,8 @@
   {{#each todos}}
   <ul>
     <li>
-      {{ this.name }}
+      {{ this.name }} &nbsp
+      <a href="./todos/{{ this._id }}"><button class="btn-sm btn-secondary ">Detail</button></a>
     </li>
   </ul>
   {{/each}}
