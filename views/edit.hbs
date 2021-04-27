@@ -1,0 +1,11 @@
+<div class="container m-5">
+  <form action="/todos/{{ todo._id }}" method="POST">
+    <div class="mb-3">
+      <label for="editTodo" class="form-label mb-2">Edit Todo</label>
+      <input type="text" class="form-control mb-3" id="editTodo" name="name" placeholder="{{ todo.name }} ..."
+        value="{{ todo.name }}" aria-describedby="editTodo">
+      <button type="submit" class="btn btn-success">Save</button>
+    </div>
+  </form>
+  <a href="/"><button class="btn btn-dark">back</button></a>
+</div>
