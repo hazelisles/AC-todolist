@@ -11,7 +11,7 @@
       {{ this.name }} &nbsp
       <a href="./todos/{{ this._id }}"><button class="btn-sm btn-secondary mr-2">Detail</button></a>
       <a href="./todos/{{ this._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>
-      <form action="./todos/{{ this._id }}/delete" method="POST" style="display: inline">
+      <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline">
         <button type="submit" class="btn-sm btn-secondary mr-2">Delete</button>
       </form>
     </li>
