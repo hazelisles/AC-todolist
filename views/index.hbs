@@ -6,6 +6,8 @@
   {{#each todos}}
   <ul>
     <li>
+      <input class="pr-2" type="checkbox" name="isDone" aria-label="Checkbox for following text input" {{#if
+        this.isDone}} checked {{/if}} disabled>
       {{ this.name }} &nbsp
       <a href="./todos/{{ this._id }}"><button class="btn-sm btn-secondary mr-2">Detail</button></a>
       <a href="./todos/{{ this._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>

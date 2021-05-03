@@ -1,5 +1,9 @@
 <div class="container mb-5">
-  <h3 class="my-3">Mission: {{ todo.name }}</h3>
+  <div class="my-3">
+    <input type="checkbox" name="isDone" aria-label="Checkbox for following text input" {{#if todo.isDone}} checked
+      {{/if}} disabled>
+    <span class="ml-2">Mission: {{ todo.name }}</span>
+  </div>
   <a href="/todos/{{ todo._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>
   <form action="/todos/{{ todo._id }}/delete" method="POST" style="display: inline">
     <button type="submit" class="btn-sm btn-secondary mr-2">Delete</button>

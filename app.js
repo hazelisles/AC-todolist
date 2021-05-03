@@ -35,14 +35,13 @@ app.get('/todos/new', (req, res) => {
 
 app.post('/todos/', (req, res) => {
   const newTodo = req.body.name
-  
   return Todo.create({ name: newTodo })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 app.get('/todos/:id', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   return Todo.findById(id)
     .lean()
     .then(todo => res.render('detail', { todo }))
@@ -50,7 +49,7 @@ app.get('/todos/:id', (req, res) => {
 })
 
 app.get('/todos/:id/edit', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   return Todo.findById(id)
     .lean()
     .then(todo => res.render('edit', { todo }))
@@ -58,11 +57,12 @@ app.get('/todos/:id/edit', (req, res) => {
 })
 
 app.post('/todos/:id', (req, res) => {
-  const id = req.params.id
-  const edit = req.body.name
+  const { id } = req.params
+  const { name, isDone } = req.body
   return Todo.findById(id)
     .then(todo => {
-      todo.name = edit
+      todo.name = name
+      todo.isDone = isDone === "on"
       return todo.save()
     })
     .then(() => res.redirect(`/todos/${id}`))
@@ -70,7 +70,7 @@ app.post('/todos/:id', (req, res) => {
 })
 
 app.post('/todos/:id/delete', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   return Todo.findById(id)
     .then(todo => todo.remove())
     .then(() => res.redirect('/'))

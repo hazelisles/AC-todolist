@@ -1,11 +1,15 @@
 <div class="container m-5">
   <form action="/todos/{{ todo._id }}" method="POST">
-    <div class="mb-3">
-      <label for="editTodo" class="form-label mb-2">Edit Todo</label>
-      <input type="text" class="form-control mb-3" id="editTodo" name="name" placeholder="{{ todo.name }} ..."
-        value="{{ todo.name }}" aria-describedby="editTodo">
-      <button type="submit" class="btn btn-success">Save</button>
+    <label for="editTodo" class="form-label mb-2">Edit Todo</label>
+    <div class="input-group mb-3">
+      <div class="input-group-text">
+        <input class="form-check-input mt-0" type="checkbox" name="isDone"
+          aria-label="Checkbox for following text input" {{#if todo.isDone}} checked {{/if}}>
+      </div>
+      <input type="text" class="form-control" id="editTodo" name="name" placeholder="{{ todo.name }} ..."
+        value="{{ todo.name }}" aria-label="Text input with checkbox" aria-describedby="editTodo">
     </div>
+    <button type="submit" class="btn btn-success">Save</button>
   </form>
-  <a href="/"><button class="btn btn-dark">back</button></a>
+  <a href="/"><button class="btn btn-dark mt-3">back</button></a>
 </div>
