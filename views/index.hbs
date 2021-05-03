@@ -1,20 +1,18 @@
-<div class="container m-5">
-  <div class="todo-title mb-3">
-    <h1>My Todo List</h1>
-  </div>
-  <a href="./todos/new"><button class="btn btn-outline-dark mb-3">Create</button></a>
-  {{#each todos}}
-  <ul>
-    <li>
-      <input class="pr-2" type="checkbox" name="isDone" aria-label="Checkbox for following text input" {{#if
-        this.isDone}} checked {{/if}} disabled>
-      {{ this.name }} &nbsp
-      <a href="./todos/{{ this._id }}"><button class="btn-sm btn-secondary mr-2">Detail</button></a>
-      <a href="./todos/{{ this._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>
-      <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline">
-        <button type="submit" class="btn-sm btn-secondary mr-2">Delete</button>
-      </form>
-    </li>
-  </ul>
-  {{/each}}
+<div class="todo-title mb-3">
+  <h1>My Todo List</h1>
 </div>
+
+{{#each todos}}
+<ul>
+  <li>
+    <input class="pr-2" type="checkbox" name="isDone" aria-label="Checkbox for following text input" {{#if this.isDone}}
+      checked {{/if}} disabled>
+    {{ this.name }} &nbsp
+    <a href="./todos/{{ this._id }}"><button class="btn-sm btn-secondary mr-2">Detail</button></a>
+    <a href="./todos/{{ this._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>
+    <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline">
+      <button type="submit" class="btn-sm btn-secondary mr-2">Delete</button>
+    </form>
+  </li>
+</ul>
+{{/each}}
