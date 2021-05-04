@@ -11,7 +11,8 @@
 </div>
 <div class="my-3">
   <a href="/todos/{{ todo._id }}/edit"><button class="btn btn-success mr-2">Edit</button></a>
-  <form action="/todos/{{ todo._id }}?_method=DELETE" method="POST" style="display: inline">
+  <form action="/todos/{{ todo._id }}?_method=DELETE" method="POST" style="display: inline"
+    onsubmit="return deleteConfirm();">
     <button type="submit" class="btn btn-danger mr-2">Delete</button>
   </form>
   <a href="/"><button class="btn btn-dark">Back</button></a>
