@@ -1,12 +1,14 @@
-<div class="container mb-5">
-  <div class="my-3">
-    <input type="checkbox" name="isDone" aria-label="Checkbox for following text input" {{#if todo.isDone}} checked
-      {{/if}} disabled>
-    <span class="ml-2">Mission: {{ todo.name }}</span>
+<div class="input-group input-group-lg">
+  <div class="input-group-text">
+    <input class="form-check-input mt-0" type="checkbox" name="isDone" aria-label="Checkbox for following text input"
+      {{#if todo.isDone}} checked {{/if}} disabled>
   </div>
-  <a href="/todos/{{ todo._id }}/edit"><button class="btn-sm btn-secondary mr-2">Edit</button></a>
+  <input class="form-control" type="text" name="name" value="Mission: {{ todo.name }}" disabled>
+</div>
+<div class="my-3">
+  <a href="/todos/{{ todo._id }}/edit"><button class="btn btn-success mr-2">Edit</button></a>
   <form action="/todos/{{ todo._id }}?_method=DELETE" method="POST" style="display: inline">
-    <button type="submit" class="btn-sm btn-secondary mr-2">Delete</button>
+    <button type="submit" class="btn btn-danger mr-2">Delete</button>
   </form>
-  <a href="/"><button class="btn-sm btn-dark">back</button></a>
+  <a href="/"><button class="btn btn-dark">back</button></a>
 </div>
