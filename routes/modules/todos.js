@@ -2,17 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Todo = require('../../models/todo')
 
-router.get('/new', (req, res) => {
-  return res.render('new')
-})
-
-router.post('/', (req, res) => {
-  const newTodo = req.body.name
-  return Todo.create({ name: newTodo })
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
 router.get('/:id', (req, res) => {
   const { id } = req.params
   return Todo.findById(id)
