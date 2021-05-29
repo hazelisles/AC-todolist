@@ -1,5 +1,6 @@
 <div class="todo-title mb-3">
-  <h1>My Todo List</h1>
+  <h1>{{#if isAuthenticated}}{{ user.name }}'s {{/if}}
+    Todo List</h1>
 </div>
 
 <ul class="list-group">
