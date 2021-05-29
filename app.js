@@ -6,6 +6,7 @@ const session = require('express-session')
 const PORT = process.env.PORT || 3000
 
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -18,6 +19,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app)
 app.use(routes)
 
 app.listen(PORT, () => {
