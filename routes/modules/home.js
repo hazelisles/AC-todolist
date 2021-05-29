@@ -3,8 +3,8 @@ const router = express.Router()
 const Todo = require('../../models/todo')
 
 router.get('/', (req, res) => {
-  // get all data of todo
-  Todo.find()
+  const userId = req.user._id
+  Todo.find({ userId })
     .lean()
     .sort({_id: 'asc'})
     .then(todos => res.render('index', { todos }))
@@ -16,8 +16,9 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const newTodo = req.body.name
-  return Todo.create({ name: newTodo })
+  const userId = req.user._id
+  const { name } = req.body
+  return Todo.create({ name, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
