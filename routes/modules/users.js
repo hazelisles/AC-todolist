@@ -2,12 +2,26 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
+const { check, validationResult } = require('express-validator')
 
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login', [check('password').notEmpty().withMessage('請輸入密碼！'), check('email').notEmpty().withMessage('請輸入Email！')], (req, res, next) => {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      const loginemail = req.body.email
+      const errors = error.array()
+      return res.render('login', {
+      errors,
+      loginemail,
+    })
+    }
+    if (error.isEmpty()) {
+      next()
+    }
+    }, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
@@ -20,10 +34,10 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
   if (!name || !email || !password || !confirmPassword) {
-    errors.push({ message: '所有欄位都是必填。' })
+    errors.push({ msg: '所有欄位都是必填。' })
   }
   if (password !== confirmPassword) {
-    errors.push({ message: '密碼與確認密碼不相符！' })
+    errors.push({ msg: '密碼與確認密碼不相符！' })
   }
   if (errors.length) {
     return res.render('register', {
@@ -36,7 +50,7 @@ router.post('/register', (req, res) => {
   }
   User.findOne({ email }).then(user => {
     if (user) {
-      errors.push({ message: '此 Email 已經註冊過了。'})
+      errors.push({ msg: '此 Email 已經註冊過了。'})
       res.render('register', {
         errors,
         name,
