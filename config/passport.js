@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 module.exports = app => {
   // 初始化passport
@@ -13,12 +14,14 @@ module.exports = app => {
         if (!user) {
           return done(null, false, req.flash('error_message', '此 email 尚未註冊！'), req.flash('loginemail', email))
         }
-        if (user.password !== password) {
-          return done(null, false, req.flash('error_message', 'Email 或 Password 不正確！'), req.flash('loginemail', email))
-        }
-        return done(null, user)
+        return bcrypt.compare(password, user.password).then(isMatch => {
+          if (!isMatch) {
+            return done(null, false, req.flash('error_message', 'Email 或 Password 不正確！'), req.flash('loginemail', email))
+          }
+          return done(null, user)
+        })
+        .catch(err => done(err, false))
       })
-      .catch(err => done(err, false))
   }))
   // 設定序列化及反序列化
   passport.serializeUser((user, done) => {

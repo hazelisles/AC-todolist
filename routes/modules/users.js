@@ -67,7 +67,10 @@ router.post('/register', (req, res) => {
         email,
         password: hash
       }))
-      .then(() => res.redirect('/'))
+      .then(() => {
+        const success = { msg: '註冊成功！'}
+        res.render('login', { success })
+      })
       .catch(err => console.log(err))
   })
 })
