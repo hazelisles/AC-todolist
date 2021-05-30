@@ -2,14 +2,15 @@
   <div class="col-8 col-md-6 col-lg-5 mx-auto my-5">
     <div class="card card-body">
       <h1 class="text-center my-3">Login</h1>
+      {{> message}}
       <form action="/users/login" method="post" class="row">
         <div class="col-10 mx-auto my-2">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{ loginemail }}" required>
         </div>
         <div class="col-10 mx-auto my-2">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
         </div>
         <button type="submit" class="btn btn-primary col-4 mx-auto my-3">Login</button>
       </form>
